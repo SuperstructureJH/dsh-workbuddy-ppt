@@ -1,0 +1,150 @@
+{
+  "name": "dsh-workbuddy-ppt",
+  "description": "Self-contained editable PPTX generation, deterministic scene QA, template workflows, and local delivery for DeepSeek Harness",
+  "version": "0.1.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SuperstructureJH/dsh-workbuddy-ppt.git"
+  },
+  "homepage": "https://github.com/SuperstructureJH/dsh-workbuddy-ppt#readme",
+  "bugs": {
+    "url": "https://github.com/SuperstructureJH/dsh-workbuddy-ppt/issues"
+  },
+  "type": "module",
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0"
+  },
+  "keywords": [
+    "dsh-plugin",
+    "deepseek-harness",
+    "workbuddy",
+    "ppt",
+    "pptx",
+    "presentation"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/types/index.d.ts",
+  "bin": {
+    "dsh-pptd": "./lib/bin.js"
+  },
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "types": "./lib/types/client/index.d.ts",
+      "default": "./lib/client.js"
+    },
+    "./invariant": {
+      "types": "./lib/types/invariant.d.ts",
+      "default": "./lib/invariant.js"
+    },
+    "./runtime-staging": {
+      "types": "./lib/types/runtime-staging.d.ts",
+      "default": "./lib/runtime-staging.js"
+    },
+    "./pptd": {
+      "types": "./lib/types/pptd.d.ts",
+      "default": "./lib/pptd.js"
+    },
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-tool"
+      ],
+      "platform": "web"
+    }
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@aiden0z/pptx-renderer": "1.2.4",
+    "fflate": "^0.8.3",
+    "js-yaml": "^4.2.0",
+    "pptxgenjs": "^4.0.1",
+    "typescript": "^6.0.3",
+    "zod": "^4.4.3",
+    "@deepseek-ai/schemastery": "^3.18.1"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-agent": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-brand": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-connection": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-runtime": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-locale": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-conversation": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-primitives": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-slots": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-invariants": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-tool": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-llm": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-session": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-skill": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-system-prompt": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-subprocess": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-tools": "^0.1.1-rc.2"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.1.0",
+    "@types/js-yaml": "^4.0.9",
+    "@types/react": "~18.3.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "@deepseek-ai/cordis": "^4.0.1",
+    "@deepseek-ai/dsh-brand": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-connection": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-locale": "^0.1.1-rc.2",
+    "@deepseek-ai/cordis-plugin-include": "^1.0.6",
+    "@deepseek-ai/dsh-client-ui-conversation": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-test-runtime": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-primitives": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-slots": "^0.1.1-rc.2",
+    "@deepseek-ai/cordis-plugin-loader": "^1.0.2",
+    "@deepseek-ai/dsh-client-runtime": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-invariants": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-llm": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-skill": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-subprocess": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-subprocess-local": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-agent": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-tool": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-session": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-system-prompt": "^0.1.1-rc.2",
+    "@deepseek-ai/dsh-tools": "^0.1.1-rc.2"
+  },
+  "files": [
+    "lib/index.js",
+    "lib/invariant.js",
+    "lib/bin.js",
+    "lib/client.js",
+    "cordis.patch.yml",
+    "LICENSE",
+    "lib/pptd.js",
+    "lib/runtime-staging.js",
+    "scripts/stage-design-systems.mjs",
+    "scripts/stage-workbuddy-runtime.mjs",
+    "skills/ppt-design-systems/**",
+    "skills/workbuddy-ppt/**",
+    "skills/ppt-template-fidelity/**",
+    "lib/types/**/*.d.ts"
+  ],
+  "scripts": {
+    "stage:design-systems": "node scripts/stage-design-systems.mjs",
+    "stage:workbuddy-runtime": "node scripts/stage-workbuddy-runtime.mjs"
+  }
+}
