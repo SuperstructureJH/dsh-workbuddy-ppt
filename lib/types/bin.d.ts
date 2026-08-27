@@ -1,4 +1,13 @@
 #!/usr/bin/env node
-/** Thin local CLI over the shared clean-room PPTD engine. */
-export {};
+/** Local, bounded command line interface for the clean-room PPTD v2 toolchain. */
+export interface CliIo {
+    readonly stdout: {
+        write(value: string): unknown;
+    };
+    readonly stderr: {
+        write(value: string): unknown;
+    };
+}
+/** Execute the CLI without terminating the host process. */
+export declare function runCli(argv: readonly string[], io?: CliIo): Promise<number>;
 //# sourceMappingURL=bin.d.ts.map

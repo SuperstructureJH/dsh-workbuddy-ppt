@@ -61,7 +61,9 @@ export interface Config {
     workbuddyMaxTotalAssetBytes?: number;
     /** Absolute first-party WorkBuddy PPT Skill override. The package-bundled Skill is the default. */
     workbuddyPptSkillRoot?: string;
-    /** Absolute staged root containing academic.md, promotion.md, and work.md. */
+    /** Absolute Kimi-compatible PPT Skill override. The package-bundled Skill is the default. */
+    kimiPptSkillRoot?: string;
+    /** Absolute local root containing the five-category visual library or the legacy three-file library. */
     pptDesignSystemRoot?: string;
 }
 /** Loader schema with conservative local defaults. */

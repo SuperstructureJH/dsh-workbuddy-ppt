@@ -1,7 +1,7 @@
 /** Application service coordinating validation, generation, persistence, and audit. */
 import type { SessionId } from '@deepseek-ai/dsh-session/types';
 import type { ArchiveLimits } from './archive.ts';
-import { type OfficeCreateInput, type OfficeDeck, type OfficeDeckPreview, type OfficeDownload, type OfficeOutlineDraft, type OfficeOutputLocation, type OfficePptState, type OfficeTemplate, type OfficePptSceneCheck, type OfficePptSceneInput, type OfficeTemplatePageReference, type OfficeUpdateSlideInput, type OfficeUploadInput, type OfficeWorkBuddyCreateInput } from './protocol.ts';
+import { type OfficeCreateInput, type OfficeDeck, type OfficeDeckPreview, type OfficeDownload, type OfficeOutlineDraft, type OfficeOutputLocation, type OfficePptState, type OfficePresentationMode, type OfficeTemplate, type OfficePptSceneCheck, type OfficePptSceneInput, type OfficeTemplatePageReference, type OfficeUpdateSlideInput, type OfficeUploadInput, type OfficeWorkBuddyCreateInput } from './protocol.ts';
 import { OfficePptStore } from './store.ts';
 import type { WorkBuddyPptRuntime } from './workbuddy-runtime.ts';
 /** Host-side limits that bound every extraction and generated document. */
@@ -88,7 +88,9 @@ export declare class OfficePptService {
      * @param actor - Audited caller identity.
      * @returns The selected template after the state transition is committed.
      */
-    selectTemplate(sessionId: SessionId, templateId: string, actor: OfficeActor): Promise<OfficeTemplate>;
+    selectTemplate(sessionId: SessionId, templateId: string, actor: OfficeActor, mode?: OfficePresentationMode): Promise<OfficeTemplate>;
+    /** Persist the active composer workflow independently from the user's visible draft. */
+    selectPresentationMode(sessionId: SessionId, mode: OfficePresentationMode | undefined, actor: OfficeActor): Promise<boolean>;
     /**
      * Clear the resident composer's template choice while keeping PPT mode active.
      * @param sessionId - Session that owns the composer state.

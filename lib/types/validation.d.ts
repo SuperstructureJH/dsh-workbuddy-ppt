@@ -10,9 +10,29 @@ export declare const templateSchema: z.ZodPipe<z.ZodPreprocess<z.ZodObject<{
         "built-in": "built-in";
         extracted: "extracted";
     }>;
+    supportedModes: z.ZodOptional<z.ZodArray<z.ZodEnum<{
+        slides: "slides";
+        ppt: "ppt";
+    }>>>;
+    category: z.ZodOptional<z.ZodEnum<{
+        custom: "custom";
+        strategy: "strategy";
+        business: "business";
+        work: "work";
+        promotion: "promotion";
+        academic: "academic";
+        consulting: "consulting";
+        finance: "finance";
+    }>>;
+    sourceCollection: z.ZodOptional<z.ZodEnum<{
+        extracted: "extracted";
+        indexed: "indexed";
+        curated: "curated";
+    }>>;
+    variantLabel: z.ZodOptional<z.ZodString>;
     aspectRatio: z.ZodEnum<{
-        wide: "wide";
         standard: "standard";
+        wide: "wide";
     }>;
     titleFontFace: z.ZodString;
     bodyFontFace: z.ZodString;
@@ -108,12 +128,12 @@ export declare const templateSchema: z.ZodPipe<z.ZodPreprocess<z.ZodObject<{
             }>>;
             recommendedRoles: z.ZodArray<z.ZodEnum<{
                 cover: "cover";
+                section: "section";
                 timeline: "timeline";
                 process: "process";
                 comparison: "comparison";
                 matrix: "matrix";
                 agenda: "agenda";
-                section: "section";
                 overview: "overview";
                 evidence: "evidence";
                 closing: "closing";
@@ -121,10 +141,10 @@ export declare const templateSchema: z.ZodPipe<z.ZodPreprocess<z.ZodObject<{
             structureSummary: z.ZodString;
             zones: z.ZodArray<z.ZodPipe<z.ZodObject<{
                 kind: z.ZodEnum<{
+                    line: "line";
                     title: "title";
                     text: "text";
                     shape: "shape";
-                    line: "line";
                     image: "image";
                     table: "table";
                     chart: "chart";
@@ -135,8 +155,8 @@ export declare const templateSchema: z.ZodPipe<z.ZodPreprocess<z.ZodObject<{
                 height: z.ZodNumber;
                 shape: z.ZodOptional<z.ZodEnum<{
                     line: "line";
-                    rect: "rect";
                     ellipse: "ellipse";
+                    rect: "rect";
                     roundRect: "roundRect";
                     other: "other";
                 }>>;
@@ -160,12 +180,12 @@ export declare const templateSchema: z.ZodPipe<z.ZodPreprocess<z.ZodObject<{
                     right: "right";
                 }>>;
             }, z.core.$strict>, z.ZodTransform<OfficeTemplatePageZone, {
-                kind: "title" | "text" | "shape" | "line" | "image" | "table" | "chart";
+                kind: "line" | "title" | "text" | "shape" | "image" | "table" | "chart";
                 x: number;
                 y: number;
                 width: number;
                 height: number;
-                shape?: "line" | "rect" | "ellipse" | "roundRect" | "other" | undefined;
+                shape?: "line" | "ellipse" | "rect" | "roundRect" | "other" | undefined;
                 fill?: string | undefined;
                 stroke?: string | undefined;
                 textRole?: "title" | "text" | undefined;
@@ -202,7 +222,7 @@ export declare const templateSchema: z.ZodPipe<z.ZodPreprocess<z.ZodObject<{
     name: string;
     description: string;
     origin: "built-in" | "extracted";
-    aspectRatio: "wide" | "standard";
+    aspectRatio: "standard" | "wide";
     titleFontFace: string;
     bodyFontFace: string;
     palette: {
@@ -215,6 +235,10 @@ export declare const templateSchema: z.ZodPipe<z.ZodPreprocess<z.ZodObject<{
     };
     previewTitle: string;
     previewSubtitle: string;
+    supportedModes?: ("slides" | "ppt")[] | undefined;
+    category?: "custom" | "strategy" | "business" | "work" | "promotion" | "academic" | "consulting" | "finance" | undefined;
+    sourceCollection?: "extracted" | "indexed" | "curated" | undefined;
+    variantLabel?: string | undefined;
     source?: {
         fileName: string;
         sha256: string;
@@ -242,7 +266,7 @@ export declare const templateSchema: z.ZodPipe<z.ZodPreprocess<z.ZodObject<{
             bodyColumns: 0 | 2 | 1 | 3;
             density: "light" | "balanced" | "dense";
             features: ("image" | "table" | "chart" | "statement" | "timeline" | "process" | "comparison" | "matrix" | "kpi")[];
-            recommendedRoles: ("cover" | "timeline" | "process" | "comparison" | "matrix" | "agenda" | "section" | "overview" | "evidence" | "closing")[];
+            recommendedRoles: ("cover" | "section" | "timeline" | "process" | "comparison" | "matrix" | "agenda" | "overview" | "evidence" | "closing")[];
             structureSummary: string;
             zones: OfficeTemplatePageZone[];
             jsxReference: string;
@@ -269,12 +293,12 @@ export declare const slideSchema: z.ZodPipe<z.ZodObject<{
     id: z.ZodPipe<z.ZodString, z.ZodTransform<OfficeSlideId, string>>;
     role: z.ZodOptional<z.ZodEnum<{
         cover: "cover";
+        section: "section";
         timeline: "timeline";
         process: "process";
         comparison: "comparison";
         matrix: "matrix";
         agenda: "agenda";
-        section: "section";
         overview: "overview";
         evidence: "evidence";
         closing: "closing";
@@ -306,7 +330,7 @@ export declare const slideSchema: z.ZodPipe<z.ZodObject<{
     bullets: string[];
     notes: string;
     sourceRefs: string[];
-    role?: "cover" | "timeline" | "process" | "comparison" | "matrix" | "agenda" | "section" | "overview" | "evidence" | "closing" | undefined;
+    role?: "cover" | "section" | "timeline" | "process" | "comparison" | "matrix" | "agenda" | "overview" | "evidence" | "closing" | undefined;
 }>>;
 /** Strict session-state schema. */
 export declare const stateSchema: z.ZodType<OfficePptState>;

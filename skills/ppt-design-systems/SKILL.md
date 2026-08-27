@@ -1,16 +1,17 @@
 ---
 name: ppt-design-systems
-description: Select one operator-staged Academic, Promotion, or Work presentation design system before authoring a deck; use with the Office PPT Slides or PPT workflow, not as a renderer.
+description: Select one local Academic, Consulting, Finance, Promotion, or Work presentation design system before authoring a deck; use with the Office PPT Slides or PPT workflow, not as a renderer.
 ---
 
 # PPT Design Systems
 
 Use this catalog after the active presentation workflow has established the audience, purpose, material, and page plan.
 
-1. Choose one category: `academic` for research, teaching, or defense; `promotion` for campaigns, brand reports, launches, or public storytelling; `work` for operating reviews, project reports, decisions, or annual reports.
+1. Choose one category: `academic` for research, teaching, or defense; `consulting` for strategy, due diligence, transformation, or industry analysis; `finance` for investment, markets, financial memos, or annual reports; `promotion` for campaigns, brand reports, launches, or public storytelling; `work` for operating reviews, project reports, decisions, or internal annual reports.
 2. Load exactly one `ppt-style-*` Skill from the generated catalog appended below. Honor an explicit user choice. Otherwise choose the style whose signature fits the content, evidence type, density, and image needs.
-3. Keep the chosen style for the whole deck. Chapter-level color variation is allowed only when that style defines it.
-4. Record the selected style Skill name and the reasons for the choice in the deck's DESIGN artifact or declarative scene source.
+3. When the selected style exposes a local `reference.jpg`, inspect that contact sheet before authoring. Use it to understand page silhouette, grouping, hierarchy, palette relationships, image scale, and page rhythm. Rebuild final content as editable objects.
+4. Keep the chosen style for the whole deck. Chapter-level color variation is allowed only when that style defines it.
+5. Record the selected style Skill name and the reasons for the choice in the deck's DESIGN artifact or declarative scene source.
 
 ## Precedence
 

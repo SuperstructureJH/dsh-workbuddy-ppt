@@ -13,6 +13,7 @@ export interface PptdProjectSource {
     readonly manifest: string;
     readonly pages: ReadonlyMap<string, string>;
     readonly assets: ReadonlyMap<string, PptdAsset>;
+    readonly issues?: readonly PptdIssue[];
 }
 /** One normalized PPTD diagnostic. */
 export interface PptdIssue {
@@ -32,6 +33,17 @@ export interface PptdCheck {
     readonly warningCount: number;
     readonly errorCount: number;
     readonly issues: readonly PptdIssue[];
+    readonly compatibility: PptdCompatibilitySummary;
+}
+/** Renderer outcome promised for one PPTD semantic feature. */
+export type PptdCompatibilityLevel = 'native' | 'normalized' | 'vector-fallback' | 'raster-fallback' | 'unsupported';
+/** Aggregate renderer compatibility included in every deterministic check. */
+export interface PptdCompatibilitySummary {
+    readonly native: number;
+    readonly normalized: number;
+    readonly vectorFallback: number;
+    readonly rasterFallback: number;
+    readonly unsupported: number;
 }
 /** Parsed PPTD project retained as a normalized, renderer-independent AST. */
 export interface PptdProject {
@@ -39,6 +51,7 @@ export interface PptdProject {
     readonly title: string;
     readonly width: number;
     readonly height: number;
+    readonly template?: Dict;
     readonly theme: Dict;
     readonly pages: readonly PptdPage[];
     readonly parseIssues: readonly PptdIssue[];
@@ -63,6 +76,8 @@ export declare function parsePptdProject(source: PptdProjectSource): PptdProject
 export declare function checkPptdProject(project: PptdProject): PptdCheck;
 /** Render one checked PPTD AST to editable native PowerPoint objects. */
 export declare function renderPptdProject(project: PptdProject): Promise<RenderedPptd>;
+/** Resolve a PPTD entry file from either the entry itself or its project directory. */
+export declare function resolvePptdEntry(inputPath: string): Promise<string>;
 /** Load a confined local PPTD project. Network resources stay disabled. */
 export declare function loadPptdProject(entryPath: string): Promise<PptdProject>;
 export {};

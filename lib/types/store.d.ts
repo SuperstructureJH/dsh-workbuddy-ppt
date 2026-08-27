@@ -122,11 +122,12 @@ export declare class OfficePptStore {
      * Append one completed or failed operation to the shared audit ledger.
      * @param sessionId - Active DSH session.
      * @param activity - Attributed operation record.
-     * @param facts - Optional presentation and template identities.
+     * @param facts - Optional presentation, template, and mode identities.
      */
     appendAudit(sessionId: SessionId, activity: OfficeActivity, facts: {
         readonly deckId?: string;
         readonly templateId?: string;
+        readonly mode?: string;
     }): Promise<void>;
     /**
      * Replace or append one extracted template in session state.

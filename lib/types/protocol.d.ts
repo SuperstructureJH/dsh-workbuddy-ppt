@@ -124,11 +124,19 @@ export interface OfficeTemplateSource {
     readonly extractedAt: string;
 }
 /** A selectable native-generation template. */
+export type OfficePresentationMode = 'slides' | 'ppt';
+/** Product-facing category retained from the Kimi design-system library. */
+export type OfficeTemplateCategory = 'strategy' | 'business' | 'work' | 'promotion' | 'academic' | 'consulting' | 'finance' | 'custom';
 export interface OfficeTemplate {
     readonly id: OfficeTemplateId;
     readonly name: string;
     readonly description: string;
     readonly origin: 'built-in' | 'extracted';
+    /** Explicit workflow availability. Older persisted templates default to both modes. */
+    readonly supportedModes?: readonly OfficePresentationMode[];
+    readonly category?: OfficeTemplateCategory;
+    readonly sourceCollection?: 'indexed' | 'curated' | 'extracted';
+    readonly variantLabel?: string;
     readonly aspectRatio: 'wide' | 'standard';
     readonly titleFontFace: string;
     readonly bodyFontFace: string;
@@ -137,14 +145,16 @@ export interface OfficeTemplate {
     readonly previewSubtitle: string;
     readonly source?: OfficeTemplateSource;
 }
+/** Resolve workflow availability while preserving compatibility with older extracted templates. */
+export declare function templateSupportsMode(template: OfficeTemplate, mode: OfficePresentationMode): boolean;
 /** Narrative role performed by one slide in the deck. */
 export type OfficeSlideRole = 'cover' | 'agenda' | 'section' | 'overview' | 'evidence' | 'timeline' | 'matrix' | 'comparison' | 'process' | 'closing';
 /** Registered native layout identity. */
 export type OfficeLayoutId = 'cover.hero' | 'agenda.simple' | 'section.statement' | 'overview.kpi' | 'data.chart-insight' | 'history.timeline' | 'product.matrix' | 'comparison.two-column' | 'process.steps' | 'closing.summary';
 /** Legacy layout hint accepted at the input boundary during migration. */
 export type OfficeLayoutHint = OfficeLayoutId | 'cover' | 'section' | 'content';
-/** Visual system available to the deterministic PPT scene compiler. */
-export type OfficePptSceneVisualSystem = 'data-analysis' | 'vitality-blue';
+/** Shared template identity selected for the deterministic PPT scene compiler. */
+export type OfficePptSceneVisualSystem = OfficeTemplateId;
 /** One workspace image admitted by the Host and referenced by scene elements. */
 export interface OfficePptSceneAsset {
     readonly id: string;
@@ -217,6 +227,11 @@ export interface OfficePptScenePage {
     readonly bullets: readonly string[];
     readonly notes: string;
     readonly sourceRefs: readonly string[];
+    /** Legacy page-level source binding retained for persisted scene compatibility. */
+    readonly templateReference?: {
+        readonly sourceSlideNumber: number;
+        readonly rationale: string;
+    };
     readonly background: string;
     readonly elements: readonly OfficePptSceneElement[];
 }
@@ -232,7 +247,7 @@ export interface OfficePptSceneInput {
 }
 /** One deterministic scene-check finding returned to the model. */
 export interface OfficePptSceneIssue {
-    readonly code: 'duplicate-id' | 'out-of-bounds' | 'overlap' | 'text-overflow' | 'font-size' | 'missing-asset' | 'chart-data';
+    readonly code: 'duplicate-id' | 'out-of-bounds' | 'overlap' | 'text-overflow' | 'font-size' | 'missing-asset' | 'chart-data' | 'template-reference' | 'template-fidelity';
     readonly severity: 'warning' | 'error';
     readonly page: number;
     readonly elementId?: string;
@@ -313,7 +328,7 @@ export interface OfficeSlidePlan {
 }
 /** One deterministic page-level QA issue. */
 export interface OfficeQaIssue {
-    readonly code: 'content-capacity' | 'title-capacity' | 'chart-data' | 'out-of-bounds' | 'overlap' | 'font-size' | 'missing-source' | 'missing-asset' | 'native-object';
+    readonly code: 'content-capacity' | 'title-capacity' | 'chart-data' | 'out-of-bounds' | 'overlap' | 'font-size' | 'missing-source' | 'missing-asset' | 'native-object' | 'template-reference' | 'template-fidelity';
     readonly severity: 'warning' | 'error';
     readonly message: string;
 }
@@ -384,7 +399,7 @@ export type OfficeWorkflowSpec = {
 /** User- or agent-initiated mutation recorded for inspection. */
 export interface OfficeActivity {
     readonly id: OfficeActivityId;
-    readonly operation: 'create' | 'update-slide' | 'extract-template' | 'extract-content' | 'select-template' | 'deselect-template' | 'download' | 'reveal';
+    readonly operation: 'create' | 'update-slide' | 'extract-template' | 'extract-content' | 'select-template' | 'select-presentation-mode' | 'deselect-template' | 'download' | 'reveal';
     readonly actor: 'user' | 'agent';
     readonly status: 'completed' | 'failed';
     readonly startedAt: string;
@@ -439,6 +454,8 @@ export interface OfficeDeckPreview {
 export interface OfficePptState {
     readonly sessionId: SessionId;
     readonly templates: readonly OfficeTemplate[];
+    /** Active composer workflow. It is model context, never visible draft text. */
+    readonly presentationMode?: OfficePresentationMode;
     /** Template selected by the resident composer. The model tool uses it when template_id is omitted. */
     readonly selectedTemplateId?: OfficeTemplateId;
     readonly decks: readonly OfficeDeck[];
