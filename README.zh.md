@@ -98,7 +98,7 @@ dsh plugin --profile web add dsh-workbuddy-ppt
 
 bundle patch 把 `root` 设为 `dshHomePath('office-ppt')`，可选 Slides runtime 位于 `<root>/runtime`。Base profile 已提供 Skill Registry、`skill` 工具和本地 subprocess provider。`requireWorkbuddyRuntime: true` 会在插件加载时检查 Tencent 运行时；未提供这些文件时，默认 PPT 路径仍可使用，选择 Slides 后会在首次渲染前得到明确的 staging 错误。
 
-主要部署配置包括可选运行时根目录、包内 WorkBuddy PPT Skill 覆盖路径、可选的本地设计系统根目录、Node 可执行文件、回环端口范围、引擎就绪/逐页验证/完整渲染超时、子进程终止宽限、诊断输出上限、验证并发、显式编辑器来源，以及 STORY、DESIGN、单页 JSX、单图和图片总量上限。完整字段由[配置目录](../../../docs/config-catalog.zh.md#dsh-workbuddy-ppt)生成。
+主要部署配置包括可选运行时根目录、包内 WorkBuddy PPT Skill 覆盖路径、可选的本地设计系统根目录、Node 可执行文件、回环端口范围、引擎就绪/逐页验证/完整渲染超时、子进程终止宽限、诊断输出上限、验证并发、显式编辑器来源，以及 STORY、DESIGN、单页 JSX、单图和图片总量上限。独立仓库的[配置参考](docs/CONFIGURATION.zh.md)列出全部可接受字段和默认值。
 
 ## 存储与安全
 

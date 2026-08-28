@@ -98,7 +98,7 @@ dsh plugin --profile web add dsh-workbuddy-ppt
 
 The bundle patch sets `root` to `dshHomePath('office-ppt')`; the optional Slides runtime is `<root>/runtime`. The base profile already provides the Skill Registry, `skill` tool, and local subprocess provider. `requireWorkbuddyRuntime: true` checks staged Tencent artifacts during plugin loading. The default PPT route remains available when those artifacts are absent; choosing Slides returns a precise staging error before its first render.
 
-Deployment settings cover the optional runtime root, bundled WorkBuddy PPT Skill override, optional staged design-system root, Node executable, loopback port range, editor readiness/page validation/full render timeouts, process grace, diagnostic output limit, validation concurrency, explicit editor origins, and STORY, DESIGN, per-page JSX, per-image, and aggregate image ceilings. The generated [configuration catalog](../../../docs/config-catalog.md#dsh-workbuddy-ppt) owns the complete field list.
+Deployment settings cover the optional runtime root, bundled WorkBuddy PPT Skill override, optional staged design-system root, Node executable, loopback port range, editor readiness/page validation/full render timeouts, process grace, diagnostic output limit, validation concurrency, explicit editor origins, and STORY, DESIGN, per-page JSX, per-image, and aggregate image ceilings. The standalone [configuration reference](docs/CONFIGURATION.md) lists every accepted field and default.
 
 ## Storage and security
 
