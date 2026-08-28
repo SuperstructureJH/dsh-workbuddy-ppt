@@ -8,6 +8,17 @@
 dsh plugin --profile web add dsh-workbuddy-ppt
 ```
 
+## 文档
+
+- [安装与首次运行](docs/INSTALL.zh.md)
+- [配置参考](docs/CONFIGURATION.zh.md)
+- [兼容性矩阵](docs/COMPATIBILITY.zh.md)
+- [架构](docs/ARCHITECTURE.zh.md)
+- [验证与发行门禁](docs/VERIFICATION.zh.md)
+- [变更记录](CHANGELOG.zh.md)
+- [安全策略](SECURITY.zh.md)
+- [贡献指南](CONTRIBUTING.zh.md)
+
 ## 执行链路
 
 Slides 与 PPT 作为两个互斥操作显示在共享 New Session 输入框下方，文件继续使用统一附件、粘贴和拖拽链路。每个模式只展示自己的模板，并保留服务端权威 `selectedTemplateId`。PPT 内置来自 [`open-kimi-ppt-skill`](THIRD_PARTY_NOTICES.md) 的 44 套不重复 MIT 许可视觉参考包；每张卡片内置 3 页预览，`ppt_get_template_reference` 会返回所选模板的设计说明和全部 6 至 8 页可读参考。Slides 内置完整解析的 58 页“数据分析”和 58 页“活力蓝色”，116 个源页均带本地预览、语义索引和静态 SlideP JSX 结构参考。再次点击已选卡片或点击输入框缩略图的取消按钮会清除选择，同时保持模板区展开；取消请求被拒绝时，已加载目录和当前选择继续显示，并在目录内展示错误。

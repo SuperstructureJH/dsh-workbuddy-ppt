@@ -8,6 +8,17 @@ English | [中文](README.zh.md)
 dsh plugin --profile web add dsh-workbuddy-ppt
 ```
 
+## Documentation
+
+- [Install and first run](docs/INSTALL.md)
+- [Configuration reference](docs/CONFIGURATION.md)
+- [Compatibility matrix](docs/COMPATIBILITY.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Verification and release gates](docs/VERIFICATION.md)
+- [Changelog](CHANGELOG.md)
+- [Security policy](SECURITY.md)
+- [Contributing](CONTRIBUTING.md)
+
 ## Execution flow
 
 Slides and PPT appear as separate, mutually exclusive actions below the shared New Session composer. Files keep using the shared attachment, paste, and drop paths. Each mode exposes only its own templates and retains a server-authoritative `selectedTemplateId`. PPT ships 44 unique MIT-licensed visual reference packs from [`open-kimi-ppt-skill`](THIRD_PARTY_NOTICES.md); each card embeds three preview pages, while `ppt_get_template_reference` returns the selected design guide and all six to eight readable reference pages. Slides ships the fully parsed 58-page “Data Analysis” and 58-page “Vitality Blue” templates. Their 116 source pages carry local previews, semantic indexes, and static SlideP JSX structure references. Clicking a selected card again or using the composer preview's remove button clears the selection while the chooser stays open; a rejected deselection keeps the loaded catalog and current selection visible and shows an inline error.
